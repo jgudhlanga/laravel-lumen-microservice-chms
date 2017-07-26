@@ -48,6 +48,8 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
+$app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -60,12 +62,13 @@ $app->singleton(
 */
 
 $app->middleware([
-    'cors' =>App\Http\Middleware\Cors::class
+    \Barryvdh\Cors\HandleCors::class,
 ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +84,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Barryvdh\Cors\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

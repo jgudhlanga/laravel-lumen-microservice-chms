@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 /**
  * Description of User
@@ -16,11 +16,11 @@ class User extends Model implements Authenticatable {
     
     protected $fillable = ['firstName', 'surname', 'email', 'avatar', 'password'];
     
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'api_token'];
     
     public function todo()
     {
-       return hasMany('App\Models\Todo');
+       return hasMany('App\Models\Todo|Todo');
     }
 
     public function getAuthIdentifier() {

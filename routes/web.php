@@ -17,11 +17,15 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'api/v1'], function($app)
 {
-    $app->post('login', 'AuthController@auth');
-    $app->get('todos', 'TodoController@index');
-    $app->post('todos', 'TodoController@store');
-    $app->get('todos/{id}', 'TodoController@show');
-    $app->put('todos/{id}', 'TodoController@update');
-    $app->delete('todos/{id}', 'TodoController@destroy');
+    $app->post('auth', 'AuthController@auth');
+    //logged in user
+    $app->group(['middleware' => 'auth'], function($app){
+        $app->get('authservice/user', 'AuthController@user');
+        $app->get('todos', 'TodoController@index');
+        $app->post('todos', 'TodoController@store');
+        $app->get('todos/{id}', 'TodoController@show');
+        $app->put('todos/{id}', 'TodoController@update');
+        $app->delete('todos/{id}', 'TodoController@destroy');
+    });
     
 });

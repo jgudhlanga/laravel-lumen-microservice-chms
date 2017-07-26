@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -37,8 +37,11 @@ class AuthServiceProvider extends ServiceProvider
                 if(!empty($user))
                 {
                     $request->request->add(['userId' => $user->id]);
+                    return $user;
+                }else{
+                    return null;
                 }
-                return $user;
+                
             }
         });
     }

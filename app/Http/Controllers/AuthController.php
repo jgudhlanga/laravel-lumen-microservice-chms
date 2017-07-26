@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class AuthController extends Controller {
     
@@ -25,5 +26,11 @@ class AuthController extends Controller {
         {
             return response()->json(['error' => 'Invalid username or Password']);
         }
+    }
+    
+    public function user(Request $request)
+    {
+        $user = Auth::user();
+        return $user;
     }
 }
